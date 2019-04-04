@@ -10,7 +10,7 @@ server.use(express.json());
 server.use(helmet());
 
 server.use('/api/auth', authRouter);
-server.use('/api/users', usersRouter);
+server.use('/api/users', restricted, usersRouter);
 
 server.get('/', (req, res) => {
     res.send('server working')

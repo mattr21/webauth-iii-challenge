@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 const Users = require('../users/users-model.js');
+const secrets = require('./secrets.js');
 
 router.post('/register', (req, res) => {
     let user = req.body;
@@ -46,12 +46,11 @@ function generateToken(user) {
         subject: user.id,
         username: user.username,
     }
-    const secret = 'keep it secret, keep it safe';
     const options = {
         expiresIn: '1d',
     };
 
-    return jwt.sign(payload, secret, options);
+    return jwt.sign(payload, secrets.jwtSecret, options);
 }
 
 module.exports = router;
