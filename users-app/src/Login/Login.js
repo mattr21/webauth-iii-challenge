@@ -1,9 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 
 class Login extends React.Component {
     state = {
-        username: "sam",
-        password: "pass",
+        username: "",
+        password: "",
     };
 
     render () {
@@ -37,6 +38,26 @@ class Login extends React.Component {
             </>
         );
     }
+
+    handleSubmit = event => {
+        event.preventDefault();
+
+        const endpoint = "http://localhost:5000/api/auth/login";
+        axios
+            .post(endpoint, this.state)
+            .then(res => {
+                console.log("LOGIN RESPONSE:", res);
+            })
+            .catch(error => {
+                console.log("LOGIN ERROR:", error);
+            })
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+    }
+    
 }
 
 export default Login;
