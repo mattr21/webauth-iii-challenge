@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-class Login extends React.Component {
+class Register extends React.Component {
     state = {
         username: "",
         password: "",
+        department: "",
     };
 
     render () {
@@ -34,7 +35,18 @@ class Login extends React.Component {
                         />
                     </div>
                     <div>
-                        <button type="submit">Login</button>
+                        <label htmlFor="department" />
+                        <input 
+                            value={this.state.department}
+                            onChange={this.handleInputChange}
+                            id="department"
+                            name="department"
+                            type="text"
+                            placeholder="department"
+                        />
+                    </div>
+                    <div>
+                        <button type="submit">Register</button>
                     </div>
                 </form>
             </>
@@ -44,16 +56,16 @@ class Login extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        const endpoint = "http://localhost:5000/api/auth/login";
+        const endpoint = "http://localhost:5000/api/auth/register";
         axios
             .post(endpoint, this.state)
             .then(res => {
                 // console.log("LOGIN RESPONSE:", res);
                 localStorage.setItem('token', res.data.token);
-                this.props.history.push('/users');
+                this.props.history.push('/login');
             })
             .catch(error => {
-                console.log("LOGIN ERROR:", error);
+                console.log("REGISTER ERROR:", error);
             })
     }
 
@@ -64,4 +76,4 @@ class Login extends React.Component {
     
 }
 
-export default Login;
+export default Register;

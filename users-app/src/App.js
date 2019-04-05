@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Route, NavLink, withRouter } from 'react-router-dom';
+import Home from './home/Home.js';
+import Register from './register/Register.js';
 import Login from './login/Login.js';
-import { Route, NavLink } from 'react-router-dom';
 import Users from './users/Users.js';
 
 class App extends Component {
@@ -21,7 +23,7 @@ class App extends Component {
         </header>
         <main>
           <Route exact path="/" component={Home} />
-          {/* <Route path="/register" component={Register} /> */}
+          <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/users" component={Users} />
         </main>
@@ -31,11 +33,8 @@ class App extends Component {
 
   logout= () => {
     localStorage.removeItem('token');
+    this.props.history.push('/');
   }
 }
 
-function Home(props) {
-  return <h1>Home Component</h1>
-}
-
-export default App;
+export default withRouter(App);
