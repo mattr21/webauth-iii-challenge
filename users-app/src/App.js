@@ -27,7 +27,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/users" component={Users} />
         </main>
-      </div>
+      </div> 
     );
   }
 
