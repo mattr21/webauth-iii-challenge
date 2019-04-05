@@ -3,10 +3,12 @@ const helmet = require('helmet');
 const authRouter = require('../auth/auth-router.js');
 const usersRouter = require('../users/users-router.js');
 const restricted = require('../auth/restricted-middleware.js');
+const cors = require('cors');
 
 const server = express();
 
 server.use(express.json());
+server.use(cors());
 server.use(helmet());
 
 server.use('/api/auth', authRouter);
