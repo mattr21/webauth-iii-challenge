@@ -46,7 +46,8 @@ class Login extends React.Component {
         axios
             .post(endpoint, this.state)
             .then(res => {
-                console.log("LOGIN RESPONSE:", res);
+                // console.log("LOGIN RESPONSE:", res);
+                localStorage.setItem('token', res.data.token);
             })
             .catch(error => {
                 console.log("LOGIN ERROR:", error);
